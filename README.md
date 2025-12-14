@@ -116,7 +116,8 @@ This ensures that all items remain available even after the application is close
 
 Developed by **Neha A R**
 
-```
+Email: arneha2004@gmail.com
+GitHub: https://github.com/Curious-Cathy
 
----
+
 
