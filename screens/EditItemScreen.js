@@ -1,6 +1,8 @@
 import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import { getItems, saveItems } from '../services/storageService';
+import { Alert } from 'react-native';
+
 
 export default function EditItemScreen({ route, navigation }) {
   const { item, loadItems } = route.params;
@@ -8,15 +10,27 @@ export default function EditItemScreen({ route, navigation }) {
   const [quantity, setQuantity] = useState(item.quantity);
   const [category, setCategory] = useState(item.category);
 
-  const update = async () => {
-    const items = await getItems();
-    const updated = items.map(i =>
-      i.id === item.id ? { ...i, name, quantity, category } : i
+ const update = async () => {
+  if (!name || !quantity || !category) {
+    Alert.alert(
+      'Validation Error',
+      'All fields are required.'
     );
-    await saveItems(updated);
-    loadItems();
-    navigation.goBack();
-  };
+    return;
+  }
+
+  const items = await getItems();
+  const updated = items.map(i =>
+    i.id === item.id
+      ? { ...i, name, quantity, category }
+      : i
+  );
+
+  await saveItems(updated);
+  loadItems();
+  navigation.goBack();
+};
+
 
   return (
     <View style={styles.container}>

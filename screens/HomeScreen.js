@@ -4,7 +4,8 @@ import {
   Alert,
   StyleSheet,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import ItemCard from '../components/ItemCard';
@@ -35,9 +36,24 @@ export default function HomeScreen({ navigation }) {
     ]);
   };
 
+  const [searchText, setSearchText] = useState('');
+
+  const filteredItems = items.filter(item =>
+  item.name.toLowerCase().includes(searchText.toLowerCase())
+);
+
+
   return (
     <View style={styles.container}>
       {/* Top Action Bar */}
+      <TextInput
+  style={styles.searchInput}
+  placeholder="Search items..."
+  placeholderTextColor="#6A89A7"
+  value={searchText}
+  onChangeText={setSearchText}
+/>
+
       <View style={styles.topBar}>
         <Text style={styles.title}>Inventory</Text>
 
@@ -51,7 +67,7 @@ export default function HomeScreen({ navigation }) {
 
       {/* List */}
       <FlatList
-        data={items}
+        data={filteredItems}
         keyExtractor={item => item.id}
         ListEmptyComponent={
           <Text style={styles.empty}>No items added yet</Text>
@@ -101,5 +117,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 30,
     color: '#384959'
-  }
+  },
+  searchInput: {
+  backgroundColor: '#FFFFFF',
+  borderRadius: 12,
+  padding: 12,
+  marginBottom: 12,
+  color: '#384959'
+},
+
 });
