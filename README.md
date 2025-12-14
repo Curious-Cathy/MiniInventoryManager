@@ -104,7 +104,7 @@ This ensures that all items remain available even after the application is close
 
 ## 🚀 Future Enhancements
 
-* Search and filter inventory items
+* Filter inventory items
 * Sorting items by name or quantity
 * Low stock indicators
 * Improved form validation

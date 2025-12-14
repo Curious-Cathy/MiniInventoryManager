@@ -6,7 +6,7 @@ import { Alert } from 'react-native';
 
 export default function AddItemScreen({ navigation, route }) {
   const [name, setName] = useState('');
-  const [quantity, setQuantity] = useState('');
+  const [quantity, setQuantity] = useState(1);
   const [category, setCategory] = useState('');
 
   const save = async () => {
@@ -19,12 +19,13 @@ export default function AddItemScreen({ navigation, route }) {
   }
 
   const items = await getItems();
-  items.push({
-    id: Date.now().toString(),
-    name,
-    quantity,
-    category
-  });
+ items.push({
+  id: Date.now().toString(),
+  name,
+  quantity,
+  category
+});
+
 
   await saveItems(items);
   route.params.loadItems();
@@ -33,30 +34,83 @@ export default function AddItemScreen({ navigation, route }) {
 
 
   return (
-    <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Item Name" placeholderTextColor="#6A89A7" onChangeText={setName} />
-      <TextInput style={styles.input} placeholder="Quantity" placeholderTextColor="#6A89A7" onChangeText={setQuantity} />
-      <TextInput style={styles.input} placeholder="Category" placeholderTextColor="#6A89A7" onChangeText={setCategory} />
+  <View style={styles.overlay}>
+    <View style={styles.card}>
+      
+      <TextInput
+        style={styles.input}
+        placeholder="Item Name"
+        placeholderTextColor="#6A89A7"
+        onChangeText={setName}
+      />
 
-      <TouchableOpacity style={styles.button} onPress={save}>
-        <Text style={styles.buttonText}>Add</Text>
-      </TouchableOpacity>
+      {/* Quantity + / - */}
+      <View style={styles.quantityContainer}>
+        <TouchableOpacity
+          style={styles.qtyButton}
+          onPress={() => setQuantity(q => Math.max(1, q - 1))}
+        >
+          <Text style={styles.qtyText}>−</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.qtyValue}>{quantity}</Text>
+
+        <TouchableOpacity
+          style={styles.qtyButton}
+          onPress={() => setQuantity(q => q + 1)}
+        >
+          <Text style={styles.qtyText}>+</Text>
+        </TouchableOpacity>
+      </View>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Category"
+        placeholderTextColor="#6A89A7"
+        onChangeText={setCategory}
+      />
+
+      <View style={styles.buttonWrapper}>
+        <TouchableOpacity style={styles.button} onPress={save}>
+          <Text style={styles.buttonText}>Add Item</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
-  );
+  </View>
+);
+
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#BDDDFC',
-    padding: 20
-  },
+  overlay: {
+  flex: 1,
+  backgroundColor: 'rgba(0,0,0,0.4)',
+  justifyContent: 'center',
+  alignItems: 'center'
+},
+card: {
+  backgroundColor: '#BDDDFC',
+  width: '90%',
+  borderRadius: 20,
+  padding: 20,
+
+  
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 6 },
+  shadowOpacity: 0.2,
+  shadowRadius: 8,
+  elevation: 6
+},
+
   input: {
   backgroundColor: '#FFFFFF',
-  borderRadius: 10,
-  padding: 12,
-  marginBottom: 12,
-  color: '#384959'   
+  borderRadius: 12,
+  padding: 14,
+  marginBottom: 14,
+  color: '#384959',
+  borderWidth: 1,
+  borderColor: '#88BDF2'
 },
 
 
@@ -71,5 +125,31 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold'
-  }
+  },
+  quantityContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginBottom: 14
+},
+qtyButton: {
+  backgroundColor: '#384959',
+  width: 40,
+  height: 40,
+  borderRadius: 20,
+  alignItems: 'center',
+  justifyContent: 'center'
+},
+qtyText: {
+  color: '#FFFFFF',
+  fontSize: 22,
+  fontWeight: 'bold'
+},
+qtyValue: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  marginHorizontal: 20,
+  color: '#384959'
+},
+
 });

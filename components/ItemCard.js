@@ -6,10 +6,12 @@ export default function ItemCard({ item, onEdit, onDelete }) {
       <View style={styles.info}>
         <Text style={styles.name}>{item.name}</Text>
 
-        <Text style={styles.text}>
-          <Text style={styles.label}>Stock: </Text>
-          {item.quantity}
-        </Text>
+        <View style={styles.badge}>
+  <Text style={styles.badgeText}>
+    Qty: {item.quantity}
+  </Text>
+</View>
+
 
         <Text style={styles.text}>
           <Text style={styles.label}>Category: </Text>
@@ -32,14 +34,20 @@ export default function ItemCard({ item, onEdit, onDelete }) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-    padding: 20,          
-    marginBottom: 16,     
-    minHeight: 130,       
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
+  backgroundColor: '#FFFFFF',
+  borderRadius: 16,
+  padding: 20,
+  marginBottom: 18,
+  minHeight: 140,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.1,
+  shadowRadius: 6,
+  elevation: 4
+},
+
   info: {
     flex: 1,
     justifyContent: 'space-between' 
@@ -78,6 +86,21 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 13,
     textAlign: 'center'
-  }
+  },
+  badge: {
+  backgroundColor: '#384959',
+  alignSelf: 'flex-start',
+  paddingHorizontal: 10,
+  paddingVertical: 4,
+  borderRadius: 12,
+  marginTop: 6,
+  marginBottom: 6
+},
+badgeText: {
+  color: '#FFFFFF',
+  fontSize: 12,
+  fontWeight: 'bold'
+},
+
 });
 
