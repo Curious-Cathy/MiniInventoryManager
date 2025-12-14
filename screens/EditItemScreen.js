@@ -20,9 +20,9 @@ export default function EditItemScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} value={name} onChangeText={setName} />
-      <TextInput style={styles.input} value={quantity} onChangeText={setQuantity} />
-      <TextInput style={styles.input} value={category} onChangeText={setCategory} />
+      <TextInput style={styles.input} value={name} placeholderTextColor="#6A89A7" onChangeText={setName} />
+      <TextInput style={styles.input} value={quantity} placeholderTextColor="#6A89A7" onChangeText={setQuantity} />
+      <TextInput style={styles.input} value={category} placeholderTextColor="#6A89A7" onChangeText={setCategory} />
 
       <TouchableOpacity style={styles.button} onPress={update}>
         <Text style={styles.buttonText}>Update</Text>
@@ -38,11 +38,13 @@ const styles = StyleSheet.create({
     padding: 20
   },
   input: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 12
-  },
+  backgroundColor: '#FFFFFF',
+  borderRadius: 10,
+  padding: 12,
+  marginBottom: 12,
+  color: '#384959'  
+}
+
   button: {
     backgroundColor: '#384959',   
     paddingVertical: 14,

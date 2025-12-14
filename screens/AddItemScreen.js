@@ -17,9 +17,9 @@ export default function AddItemScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Item Name" onChangeText={setName} />
-      <TextInput style={styles.input} placeholder="Quantity" onChangeText={setQuantity} />
-      <TextInput style={styles.input} placeholder="Category" onChangeText={setCategory} />
+      <TextInput style={styles.input} placeholder="Item Name" placeholderTextColor="#6A89A7" onChangeText={setName} />
+      <TextInput style={styles.input} placeholder="Quantity" placeholderTextColor="#6A89A7" onChangeText={setQuantity} />
+      <TextInput style={styles.input} placeholder="Category" placeholderTextColor="#6A89A7" onChangeText={setCategory} />
 
       <TouchableOpacity style={styles.button} onPress={save}>
         <Text style={styles.buttonText}>Add</Text>
@@ -35,11 +35,14 @@ const styles = StyleSheet.create({
     padding: 20
   },
   input: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 12
-  },
+  backgroundColor: '#FFFFFF',
+  borderRadius: 10,
+  padding: 12,
+  marginBottom: 12,
+  color: '#384959'   
+}
+
+
   button: {
     backgroundColor: '#384959',   // Primary
     paddingVertical: 14,
