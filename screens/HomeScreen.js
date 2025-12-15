@@ -184,8 +184,20 @@ export default function HomeScreen() {
   </TouchableOpacity>
 
   <View style={styles.qtyDisplay}>
-    <Text style={styles.qtyNumber}>{quantity}</Text>
-  </View>
+  <TextInput
+    style={styles.qtyNumber}
+    value={String(quantity)}
+    keyboardType="number-pad"
+    onChangeText={(text) => {
+      const cleaned = text.replace(/[^0-9]/g, '');
+      const num = parseInt(cleaned, 10);
+      setQuantity(isNaN(num) || num < 1 ? 1 : num);
+    }}
+    textAlign="center"
+    maxLength={4}
+  />
+</View>
+
 
   <TouchableOpacity
     style={styles.qtySmallBtn}
@@ -341,8 +353,11 @@ qtyDisplay: {
 qtyNumber: {
   fontSize: 16,
   fontWeight: '600',
-  color: '#384959'
+  color: '#384959',
+  padding: 0,
+  height: 22
 },
+
 
   modalButtons: {
     flexDirection: 'row',
