@@ -175,23 +175,26 @@ export default function HomeScreen() {
           />
 
           {/* Quantity */}
-          <View style={styles.quantityContainer}>
-            <TouchableOpacity
-              style={styles.qtyButton}
-              onPress={() => setQuantity(q => Math.max(1, q - 1))}
-            >
-              <Text style={styles.qtyText}>−</Text>
-            </TouchableOpacity>
+          <View style={styles.quantityRow}>
+  <TouchableOpacity
+    style={styles.qtySmallBtn}
+    onPress={() => setQuantity(q => Math.max(1, q - 1))}
+  >
+    <Text style={styles.qtyBtnText}>−</Text>
+  </TouchableOpacity>
 
-            <Text style={styles.qtyValue}>{quantity}</Text>
+  <View style={styles.qtyDisplay}>
+    <Text style={styles.qtyNumber}>{quantity}</Text>
+  </View>
 
-            <TouchableOpacity
-              style={styles.qtyButton}
-              onPress={() => setQuantity(q => q + 1)}
-            >
-              <Text style={styles.qtyText}>+</Text>
-            </TouchableOpacity>
-          </View>
+  <TouchableOpacity
+    style={styles.qtySmallBtn}
+    onPress={() => setQuantity(q => q + 1)}
+  >
+    <Text style={styles.qtyBtnText}>+</Text>
+  </TouchableOpacity>
+</View>
+
 
           <TextInput
             style={styles.input}
@@ -301,25 +304,46 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 14
   },
-  qtyButton: {
-    backgroundColor: '#384959',
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  qtyText: {
-    color: '#FFFFFF',
-    fontSize: 22,
-    fontWeight: 'bold'
-  },
-  qtyValue: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginHorizontal: 20,
-    color: '#384959'
-  },
+  quantityRow: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginBottom: 16
+},
+
+qtySmallBtn: {
+  width: 36,
+  height: 36,
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: '#384959',
+  alignItems: 'center',
+  justifyContent: 'center'
+},
+
+qtyBtnText: {
+  fontSize: 20,
+  fontWeight: '600',
+  color: '#384959'
+},
+
+qtyDisplay: {
+  minWidth: 50,
+  paddingVertical: 6,
+  marginHorizontal: 14,
+  borderRadius: 10,
+  backgroundColor: '#FFFFFF',
+  alignItems: 'center',
+  borderWidth: 1,
+  borderColor: '#88BDF2'
+},
+
+qtyNumber: {
+  fontSize: 16,
+  fontWeight: '600',
+  color: '#384959'
+},
+
   modalButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -342,3 +366,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   }
 });
+
+
+
